@@ -1,6 +1,6 @@
 import pandas as pd
 
-movies = pd.read_csv("movies.csv")
+movies = pd.read_csv("ml-25m/movies.csv")
 # movies
 
 import re
@@ -59,7 +59,7 @@ movie_input.observe(on_type, names="value")
 
 display(movie_input, movie_list)
 
-ratings = pd.read_csv("ratings.csv")
+ratings = pd.read_csv("ml-25m/ratings.csv")
 
 movie_id = 1
 
