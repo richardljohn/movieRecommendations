@@ -61,24 +61,24 @@ display(movie_input, movie_list)
 
 ratings = pd.read_csv("ml-25m/ratings.csv")
 
-movie_id = 1
+# movie_id = 1
 
-similar_users = ratings[(ratings["movieId"] == movie_id & (ratings["rating"] > 4))]["userId"].unique()
-similar_user_recs = ratings[(ratings["userId"].isin(similar_users)) & (ratings["rating"] > 4)]["movieId"]
-similar_user_recs_percentage = similar_user_recs.value_counts() / len(similar_users)
-similar_user_recs_top_percentage = similar_user_recs_percentage[similar_user_recs_percentage > .101]
+# similar_users = ratings[(ratings["movieId"] == movie_id & (ratings["rating"] > 4))]["userId"].unique()
+# similar_user_recs = ratings[(ratings["userId"].isin(similar_users)) & (ratings["rating"] > 4)]["movieId"]
+# similar_user_recs_percentage = similar_user_recs.value_counts() / len(similar_users)
+# similar_user_recs_top_percentage = similar_user_recs_percentage[similar_user_recs_percentage > .101]
 
-all_users = ratings[(ratings["movieId"].isin(similar_user_recs_top_percentage.index)) & (ratings["rating"] > 4)]
-all_users_recs_percentages = all_users["movieId"].value_counts() / len(all_users["userId"].unique())
-
-
-rec_percentages = pd.concat([similar_user_recs_top_percentage, all_users_recs_percentages], axis = 1)
-rec_percentages.columns = ["similar", "all"]
-rec_percentages["score"] = rec_percentages["similar"] / rec_percentages["all"]
-rec_percentages = rec_percentages.sort_values("score", ascending=False)
+# all_users = ratings[(ratings["movieId"].isin(similar_user_recs_top_percentage.index)) & (ratings["rating"] > 4)]
+# all_users_recs_percentages = all_users["movieId"].value_counts() / len(all_users["userId"].unique())
 
 
-top_ten_recommendations = rec_percentages.head(10).merge(movies, left_index=True, right_on="movieId")
+# rec_percentages = pd.concat([similar_user_recs_top_percentage, all_users_recs_percentages], axis = 1)
+# rec_percentages.columns = ["similar", "all"]
+# rec_percentages["score"] = rec_percentages["similar"] / rec_percentages["all"]
+# rec_percentages = rec_percentages.sort_values("score", ascending=False)
+
+
+# top_ten_recommendations = rec_percentages.head(10).merge(movies, left_index=True, right_on="movieId")
 
 def find_similar_movies(movie_id):
     similar_users = ratings[(ratings["movieId"] == movie_id & (ratings["rating"] > 4))]["userId"].unique()
